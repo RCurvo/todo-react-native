@@ -11,6 +11,7 @@ import {
 import { styles } from './styles'
 import Logo from '../../assets/Logo.png'
 import { ListType } from '../../components/ListType'
+import { EmptyList } from '../../components/EmptyList'
 
 export function Home() {
   return (
@@ -36,9 +37,7 @@ export function Home() {
           renderItem={({ item }) => (
             <Text style={{ color: '#fff', fontSize: 30 }}>Item maneiro</Text>
           )}
-          ListEmptyComponent={
-            <Text style={{ color: '#fff', fontSize: 30 }}>Lista vazia</Text>
-          }
+          ListEmptyComponent={<EmptyList />}
         />
       </View>
     </View>
