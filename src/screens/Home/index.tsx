@@ -67,7 +67,7 @@ export function Home() {
             underlayColor="#4EA8DE"
             activeOpacity={1}
           >
-            <EvilIcons name="plus" size={16} color="#F2F2F2" />
+            <EvilIcons name="plus" size={24} color="#F2F2F2" />
           </TouchableHighlight>
         </View>
         <View style={styles.createdAndDone}>
