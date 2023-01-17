@@ -12,7 +12,7 @@ type ListCardProps = {
 }
 
 export function ListCard({
-  done = true,
+  done = false,
   title,
   onDelete,
   onCheck,
@@ -20,12 +20,7 @@ export function ListCard({
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <BouncyCheckbox
-          fillColor="#5E60CE"
-          isChecked={done}
-          onPress={onCheck}
-          size={24}
-        />
+        <BouncyCheckbox fillColor="#5E60CE" onPress={onCheck} size={24} />
         <Text style={done ? styles.textDone : styles.textUndone}>{title}</Text>
       </View>
       <Pressable

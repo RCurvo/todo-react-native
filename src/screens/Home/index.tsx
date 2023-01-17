@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import {
   View,
-  Text,
   Image,
   TextInput,
   FlatList,
@@ -27,11 +26,15 @@ export function Home() {
     { title: 'Terceiro todo', done: false },
   ])
   const [inputText, setInputText] = useState('')
+  const [todoCount, setTodoCount] = useState(todoItems.length)
+  const [todoDoneCount, setTodoDoneCount] = useState(0)
 
   function handleCheckItem(todo: todoItemsType) {
     const updatedTodo = todoItems.map((item) => {
       if (item.title === todo.title) {
         item.done = !item.done
+        const adder = item.done ? 1 : -1
+        setTodoDoneCount((state) => state + adder)
         return item
       }
       return item
@@ -39,12 +42,24 @@ export function Home() {
     setTodoItems(updatedTodo)
   }
   function handleDeleteItem(todo: todoItemsType) {
-    const newArray = todoItems.filter((item) => item.title !== todo.title)
+    const newArray = todoItems.filter((item) => {
+      if (item.title === todo.title) {
+        if (item.done === true) {
+          setTodoDoneCount((state) => state - 1)
+        }
+      }
+      return item.title !== todo.title
+    })
     setTodoItems(newArray)
+    setTodoCount((state) => state - 1)
   }
   function handleAddItem(item: string) {
+    if (inputText.length === 0) {
+      return
+    }
     setTodoItems((state) => [...state, { title: item, done: false }])
     setInputText('')
+    setTodoCount((state) => state + 1)
   }
 
   return (
@@ -71,11 +86,12 @@ export function Home() {
           </TouchableHighlight>
         </View>
         <View style={styles.createdAndDone}>
-          <ListType title={'Criadas'} count={4} />
-          <ListType title={'Concluidas'} count={6} />
+          <ListType title={'Criadas'} count={todoCount} />
+          <ListType title={'Concluidas'} count={todoDoneCount} />
         </View>
         <FlatList
           data={todoItems}
+          keyExtractor={(item) => item.title}
           renderItem={({ item }) => (
             <ListCard
               done={item.done}
