@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
+import { useState } from 'react'
 import {
   View,
   Text,
   Image,
   TextInput,
-  TouchableOpacity,
   FlatList,
+  TouchableHighlight,
 } from 'react-native'
 import { styles } from './styles'
 import Logo from '../../assets/Logo.png'
 import { ListType } from '../../components/ListType'
 import { EmptyList } from '../../components/EmptyList'
 import { ListCard } from '../../components/ListCard'
-import { useState } from 'react'
+import EvilIcons from '@expo/vector-icons/EvilIcons'
 
 type todoItemsType = {
   title: string
@@ -54,18 +55,20 @@ export function Home() {
       <View style={styles.listContent}>
         <View style={styles.form}>
           <TextInput
+            placeholder="Adicione uma nova tarefa"
+            placeholderTextColor="#808080"
             style={styles.input}
             value={inputText}
             onChangeText={setInputText}
           />
-          <TouchableOpacity
+          <TouchableHighlight
             onPress={() => handleAddItem(inputText)}
             style={styles.button}
+            underlayColor="#4EA8DE"
+            activeOpacity={1}
           >
-            <Text style={{ color: '#ffff', fontSize: 15, fontFamily: '' }}>
-              +
-            </Text>
-          </TouchableOpacity>
+            <EvilIcons name="plus" size={16} color="#F2F2F2" />
+          </TouchableHighlight>
         </View>
         <View style={styles.createdAndDone}>
           <ListType title={'Criadas'} count={4} />

@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import { styles } from './styles'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
-import Trash from '../../assets/trash.png'
+import EvilIcons from '@expo/vector-icons/EvilIcons'
 
 type ListCardProps = {
   done?: boolean
@@ -28,9 +28,23 @@ export function ListCard({
         />
         <Text style={done ? styles.textDone : styles.textUndone}>{title}</Text>
       </View>
-      <TouchableOpacity onPress={onDelete}>
-        <Image source={Trash} />
-      </TouchableOpacity>
+      <Pressable
+        onPress={onDelete}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? '#333333' : 'transparent',
+          },
+          { padding: 10 },
+        ]}
+      >
+        {({ pressed }) => (
+          <EvilIcons
+            name="trash"
+            size={30}
+            color={pressed ? '#E25858' : '#808080'}
+          />
+        )}
+      </Pressable>
     </View>
   )
 }

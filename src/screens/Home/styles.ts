@@ -21,6 +21,8 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
     marginRight: 4,
     backgroundColor: '#262626',
+    border: '1px solid #5e60ce',
+    color: '#f2f2f2',
   },
   form: {
     marginHorizontal: 24,
